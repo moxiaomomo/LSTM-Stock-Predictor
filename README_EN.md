@@ -34,6 +34,13 @@ cd LSTM-Stock-Predictor
 ```
 
 2. **Install dependencies**:
+  
+**Method A: Use uv**
+```bash
+uv sync
+```
+
+**Method B: Use pip**
 ```bash
 pip install -r requirements.txt
 ```

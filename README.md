@@ -34,6 +34,13 @@ cd LSTM-Stock-Predictor
 ```
 
 2. **安装依赖**：
+  
+**方式 A：使用 uv **
+```bash
+uv sync
+```
+
+**方式 B：使用 pip **
 ```bash
 pip install -r requirements.txt
 ```
@@ -89,6 +96,7 @@ LSTM-Stock-Predictor/
 ├── images/                 # 项目文档图片目录
 ├── app.py                  # 主应用程序
 ├── requirements.txt        # 依赖列表
+
 ├── README.md               # 中文项目文档
 ├── README_EN.md            # 英文项目文档
 └── LICENSE                 # 许可证文件
