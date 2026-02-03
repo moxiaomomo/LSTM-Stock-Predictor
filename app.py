@@ -406,6 +406,7 @@ def get_akshare_enhanced_data(ticker, start_date, end_date, market_source="asksh
                     stock_code = ticker.split(".")[0]
                     start_date_int = int(start_date.strftime("%Y%m%d"))
                     end_date_int = int(end_date.strftime("%Y%m%d"))
+                    print(end_date_int)
 
                     df = ak.stock_zh_a_hist(
                         symbol=stock_code,
@@ -414,6 +415,7 @@ def get_akshare_enhanced_data(ticker, start_date, end_date, market_source="asksh
                         end_date=end_date_int,
                         adjust="qfq",
                     )
+                    # print(df)
                     if "日期" not in df.columns and "date" in df.columns:
                         df = df.rename(columns={"date": "日期"})
                     df = df.rename(
@@ -474,7 +476,9 @@ def get_akshare_enhanced_data(ticker, start_date, end_date, market_source="asksh
                 if df.empty:
                     raise ValueError(f"AKShare未返回 {ticker} 的数据")
 
-                return convert_to_standard_format(df, ticker, start_date, end_date)
+                data_fmt = convert_to_standard_format(df, ticker, start_date, end_date)
+                # print(data_fmt)
+                return data_fmt
 
             except Exception as e:
                 raise Exception(f"AKShare数据获取失败 {ticker}: {str(e)}")
@@ -491,7 +495,9 @@ def get_akshare_enhanced_data(ticker, start_date, end_date, market_source="asksh
         data = calculate_technical_indicators_enhanced(data)
 
         # 返回请求时间范围
-        return data.loc[start_date:end_date]
+        filter_data = data.loc[start_date:end_date]
+        # print(filter_data)
+        return filter_data
 
     except Exception as e:
         raise Exception(f"增强版AKShare错误 {ticker}: {str(e)}")
@@ -681,6 +687,7 @@ def download_and_preprocess_data(
             stock_data = get_stock_data(
                 ticker, start_date, end_date, data_source, market_source
             )
+            print(stock_data)
             stock_data.to_csv(f"{data_folder}/{ticker}.csv")
             clean_csv_files(f"{data_folder}/{ticker}.csv")
             progress_bar.progress((i + 1) / len(tickers))
