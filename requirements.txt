@@ -10,3 +10,4 @@ tqdm
 requests
 akshare
 tushare
+streamlit
